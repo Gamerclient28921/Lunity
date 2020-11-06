@@ -24,8 +24,8 @@ int hookCallback(__int64 a1, MinecraftUIRenderContext* renderCtx) {
 
 	//Logger::logHex("Context", (ulong)renderCtx);
 
-	//DrawUtils::fillRectangle(Vector4(0, 0, 100, 100), Color(1, 1, 1, 1), 1);
-	//DrawUtils::drawText(Vector2(1, 1), new string("Test"), nullptr, 1);
+	DrawUtils::fillRectangle(Vector4(0, 0, 100, 100), Color(1, 1, 1, 1), 1);
+	DrawUtils::drawText(Vector2(1, 1), new string("Test"), nullptr, 1);
 
 	DrawUtils::flush();
 	return ret;
@@ -33,7 +33,7 @@ int hookCallback(__int64 a1, MinecraftUIRenderContext* renderCtx) {
 
 void RenderHook::installHook() {
 	Logger::log("installing render hook...");
-	void* toHook = (void*)(LunMem::getBaseModule() + 0x77F1C0);
+	void* toHook = (void*)(LunMem::getBaseModule() + 0x7652A0);
 	Logger::logHex("ToHook", (ulong)toHook);
 	bool installSuccess = false;
 	if (MH_CreateHook(toHook, &hookCallback, reinterpret_cast<LPVOID*>(&original)) == MH_OK) {
@@ -50,6 +50,6 @@ void RenderHook::installHook() {
 
 void RenderHook::uninstallHook()
 {
-	void* toHook = (void*)(LunMem::getBaseModule() + 0x77F1C0);
+	void* toHook = (void*)(LunMem::getBaseModule() + 0x7652A0);
 	MH_DisableHook(toHook);
 }
