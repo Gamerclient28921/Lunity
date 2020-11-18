@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "Speed.h"
 #include "../Hooks/KeyHook.h"
+#include "../../SDK/LunMem.cpp"
+#include "../../SDK/LunMem.h"
 
 #define PI 3.14159
 float speedValue = 0.24f;

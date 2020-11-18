@@ -71,17 +71,17 @@ namespace Lunity_Injector
             }
             Console.ForegroundColor = ConsoleColor.White;
             Console.BackgroundColor = ConsoleColor.Black;
-            Console.WriteLine("Lunity injector by ASM");
-            Console.WriteLine("Verifying Lunity...");
+            Console.WriteLine("WaveClient Injector Made by the Waveclient dev team");
+            Console.WriteLine("Verifying WaveClient...");
             if (!verifyLunity())
             {
-                Console.WriteLine("An error occoured during Lunity verification...");
-                Console.WriteLine("For help, join this server: https://discord.gg/qQZg4NC");
-                Console.WriteLine("When asking for help, please supply the ENTIRE error above.");
+                Console.WriteLine("An error occoured during WaveClient verification...");
+                
+                
                 Console.ReadLine();
                 return;
             }
-            Console.WriteLine("Lunity is properly downloaded!");
+            Console.WriteLine("WaveClient is properly downloaded!");
             Console.WriteLine("Waiting for Minecraft...");
             awaitGame();
             Console.WriteLine("Minecraft found, injecting!");

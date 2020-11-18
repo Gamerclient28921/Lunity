@@ -6,6 +6,8 @@
 #include "../../Logger.h"
 #include "../CheatManager.h"
 #include <MinHook.h>
+#include "../CheatManager.cpp"
+#include "../../SDK/DrawUtils.cpp"
 #pragma comment(lib, "libMinHook.lib")
 
 typedef int (__stdcall* RenderText)(__int64 a1, MinecraftUIRenderContext* renderCtx);
@@ -33,12 +35,12 @@ int hookCallback(__int64 a1, MinecraftUIRenderContext* renderCtx) {
 
 void RenderHook::installHook() {
 	Logger::log("installing render hook...");
-	void* toHook = (void*)(LunMem::getBaseModule() + 0x7652A0);
+	uintptr_t toHook = LunMem::FindSignature("48 8B C4 55 56 57 41 54 41 55 41 56 41 57 48 8D A8 ? ? ? ? 48 81 EC ? ? ? ? 48 C7 45 ? ? ? ? ? 48 89 58 18 0F 29 70 B8 48 8B 05 ? ? ? ? 48 33 C4 48 89 85 ? ? ? ? 48 89 54 24 ? 4C 8B E1 48 89 4C 24 ?");
 	Logger::logHex("ToHook", (ulong)toHook);
 	bool installSuccess = false;
-	if (MH_CreateHook(toHook, &hookCallback, reinterpret_cast<LPVOID*>(&original)) == MH_OK) {
+	if (MH_CreateHook((void*)toHook, &hookCallback, reinterpret_cast<LPVOID*>(&original)) == MH_OK) {
 		Logger::log("Render Hook successfully created!");
-		if (MH_EnableHook(toHook) == MH_OK) {
+		if (MH_EnableHook((void*)toHook) == MH_OK) {
 			installSuccess = true;
 			Logger::log("render hook installed");
 		}
